@@ -15,7 +15,7 @@ class RPBodyLabel: UILabel {
         configure()
     }
     
-    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
+    convenience init(textAlignment: NSTextAlignment) {
         self.init(frame: .zero)
         self.textAlignment  = textAlignment
         self.font           = UIFont.preferredFont(forTextStyle: .body)

@@ -11,7 +11,7 @@ import UIKit
 class RandomPlanVC: UIViewController {
     
     var planLabel           = RPTitleLabel(textAlignment: .center, fontSize: 40)
-    var descriptionLabel    = RPBodyLabel(textAlignment: .center, fontSize: 35)
+    var descriptionLabel    = RPBodyLabel(textAlignment: .center)
     var background          = UIImageView()
     
     let plans               = ["Hike!", "Bowling!", "Movies!", "Park!", "Museum!"]
@@ -26,17 +26,20 @@ class RandomPlanVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        configureView()
         configureLabels()
         configureBackground()
-        navigationController?.navigationBar.tintColor   = .systemRed
-        navigationItem.rightBarButtonItem               = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
-        navigationItem.leftBarButtonItem                = UIBarButtonItem(image: UIImage(systemName: "shuffle"), style: .plain, target: self, action: #selector(selectPlan))
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         selectPlan()
+    }
+    
+    func configureView() {
+        view.backgroundColor                            = .systemBackground
+        navigationController?.navigationBar.tintColor   = .systemRed
+        navigationItem.rightBarButtonItem               = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        navigationItem.leftBarButtonItem                = UIBarButtonItem(image: UIImage(systemName: "shuffle"), style: .plain, target: self, action: #selector(selectPlan))
     }
     
     func configureBackground() {
@@ -77,11 +80,9 @@ class RandomPlanVC: UIViewController {
     
     @objc func selectPlan() {
         
-        let selectedPlan = Int(arc4random_uniform(UInt32 (plans.count)))
-        
+        let selectedPlan        = Int(arc4random_uniform(UInt32 (plans.count)))
         planLabel.text          = plans[selectedPlan]
         descriptionLabel.text   = plansDescriptions[selectedPlan]
-        
         background.image        = UIImage(named: backgrounds[selectedPlan])
     }
     
