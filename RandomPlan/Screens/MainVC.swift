@@ -10,12 +10,18 @@ import UIKit
 
 class MainVC: UIViewController {
     
-    var background = UIImageView()
+    var background  = UIImageView()
+    let titleText   = RPTitleLabel(textAlignment: .center, fontSize: 50)
+    let button      = RPButton(backgroundColor: .systemRed, title: "Give me a plan!")
     var timer: Timer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(button)
+        view.addSubview(titleText)
         configureBackground()
+        configureButton()
+        configureTextLabel()
         navigationController?.navigationBar.isHidden = true
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setRandomBackground), userInfo: nil, repeats: true)
         self.setRandomBackground()
@@ -23,6 +29,8 @@ class MainVC: UIViewController {
     
     func configureBackground() {
         view.addSubview(background)
+        view.sendSubviewToBack(background)
+        view.backgroundColor = .systemBackground
         background.alpha = 0.3
         background.translatesAutoresizingMaskIntoConstraints = false
         
@@ -35,12 +43,44 @@ class MainVC: UIViewController {
         
     }
     
+    func configureButton() {
+        
+        button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            button.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    func configureTextLabel() {
+        titleText.text          = "Let's go and do a fun activity!"
+        titleText.numberOfLines = 3
+        NSLayoutConstraint.activate([
+            titleText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            titleText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            titleText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            titleText.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
+    
     @objc func setRandomBackground() {
-        let colors = ["forest", "bowling", "movies", "park"]
-        let random = Int(arc4random_uniform(UInt32 (colors.count)))
-        self.background.image = UIImage(named: colors[random])
+        let backgrounds = ["forest", "bowling", "movies", "park", "museum"]
+        let random = Int(arc4random_uniform(UInt32 (backgrounds.count)))
+        self.background.image = UIImage(named: backgrounds[random])
+    }
+    
+    @objc func getRandomPlan() {
+        let destVC = RandomPlanVC()
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
     }
     
 
 
 }
+
+
+
