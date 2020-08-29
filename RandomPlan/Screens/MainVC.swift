@@ -23,8 +23,8 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         configureTimers()
         configureBackground()
-        configureButton()
         configureTextLabel()
+        configureButton()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -52,27 +52,28 @@ class MainVC: UIViewController {
         
     }
     
-    func configureButton() {
-        view.addSubview(button)
-        button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
-        
-        NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            button.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
     
     func configureTextLabel() {
         view.addSubview(titleText)
         titleText.text          = "Let's go and do a fun activity!"
         titleText.numberOfLines = 3
         NSLayoutConstraint.activate([
-            titleText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            titleText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             titleText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             titleText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             titleText.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
+    
+    func configureButton() {
+        view.addSubview(button)
+        button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: titleText.bottomAnchor, constant: 50),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            button.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
