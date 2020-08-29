@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA23F56424F9ED9500B06528 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA23F56324F9ED9500B06528 /* MapVC.swift */; };
 		FA2D71A924F5E7A2006A56EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71A824F5E7A2006A56EA /* AppDelegate.swift */; };
 		FA2D71AB24F5E7A2006A56EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2D71AA24F5E7A2006A56EA /* SceneDelegate.swift */; };
 		FA2D71B024F5E7A2006A56EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2D71AE24F5E7A2006A56EA /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA23F56324F9ED9500B06528 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		FA2D71A524F5E7A2006A56EA /* RandomPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D71A824F5E7A2006A56EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA2D71AA24F5E7A2006A56EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				FA2D71BE24F5ED6C006A56EA /* MainVC.swift */,
 				FA2D71C024F5EDB5006A56EA /* MoviesVC.swift */,
 				FACA242B24F89F1F003B1933 /* RandomPlanVC.swift */,
+				FA23F56324F9ED9500B06528 /* MapVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				FACA242C24F89F1F003B1933 /* RandomPlanVC.swift in Sources */,
 				FA2D71BD24F5E8B4006A56EA /* RPTabBarController.swift in Sources */,
 				FA2D71A924F5E7A2006A56EA /* AppDelegate.swift in Sources */,
+				FA23F56424F9ED9500B06528 /* MapVC.swift in Sources */,
 				FACA242E24F8A613003B1933 /* RPBodyLabel.swift in Sources */,
 				FACA242A24F89631003B1933 /* RPTitleLabel.swift in Sources */,
 				FA2D71AB24F5E7A2006A56EA /* SceneDelegate.swift in Sources */,

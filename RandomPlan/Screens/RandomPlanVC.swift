@@ -82,7 +82,7 @@ class RandomPlanVC: UIViewController {
     
     func configureButton() {
         view.addSubview(button)
-        //button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToMap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
@@ -98,6 +98,11 @@ class RandomPlanVC: UIViewController {
         planLabel.text          = plans[selectedPlan]
         descriptionLabel.text   = plansDescriptions[selectedPlan]
         background.image        = UIImage(named: backgrounds[selectedPlan])
+    }
+    
+    @objc func goToMap() {
+        let mapView = MapVC(plan: planLabel.text!)
+        navigationController?.pushViewController(mapView, animated: true)
     }
     
     @objc func dismissVC() {
