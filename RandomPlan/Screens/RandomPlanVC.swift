@@ -12,6 +12,7 @@ class RandomPlanVC: UIViewController {
     
     var planLabel           = RPTitleLabel(textAlignment: .center, fontSize: 40)
     var descriptionLabel    = RPBodyLabel(textAlignment: .center)
+    let button              = RPButton(backgroundColor: .systemRed, title: "Find a place!")
     var background          = UIImageView()
     
     let plans               = ["Hike!", "Bowling!", "Movies!", "Park!", "Museum!"]
@@ -29,6 +30,7 @@ class RandomPlanVC: UIViewController {
         configureView()
         configureLabels()
         configureBackground()
+        configureButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,8 +80,20 @@ class RandomPlanVC: UIViewController {
         ])
     }
     
-    @objc func selectPlan() {
+    func configureButton() {
+        view.addSubview(button)
+        //button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
         
+        NSLayoutConstraint.activate([
+            button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            button.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    
+    @objc func selectPlan() {
         let selectedPlan        = Int(arc4random_uniform(UInt32 (plans.count)))
         planLabel.text          = plans[selectedPlan]
         descriptionLabel.text   = plansDescriptions[selectedPlan]

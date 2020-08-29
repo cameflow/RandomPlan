@@ -10,29 +10,38 @@ import UIKit
 
 class MainVC: UIViewController {
     
-    var background  = UIImageView()
-    let titleText   = RPTitleLabel(textAlignment: .center, fontSize: 50)
-    let button      = RPButton(backgroundColor: .systemRed, title: "Give me a plan!")
-    var timer: Timer!
+    var timer_background: Timer!
+    var timer_alpha: Timer!
+    
+    var background      = UIImageView()
+    let titleText       = RPTitleLabel(textAlignment: .center, fontSize: 50)
+    let button          = RPButton(backgroundColor: .systemRed, title: "Give me a plan!")
+    var alpha:CGFloat   = 0.0
+    var add             = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(button)
-        view.addSubview(titleText)
+        configureTimers()
         configureBackground()
         configureButton()
         configureTextLabel()
         navigationController?.navigationBar.isHidden = true
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setRandomBackground), userInfo: nil, repeats: true)
-        self.setRandomBackground()
+    }
+    
+    func configureTimers() {
+        timer_background = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(setRandomBackground), userInfo: nil, repeats: true)
+        timer_alpha = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(changeAlpha), userInfo: nil, repeats: true)
     }
     
     func configureBackground() {
         view.addSubview(background)
         view.sendSubviewToBack(background)
-        view.backgroundColor = .systemBackground
-        background.alpha = 0.3
+        
+        view.backgroundColor    = .systemBackground
+        background.alpha        = alpha
         background.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.setRandomBackground()
         
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: view.topAnchor),
@@ -44,7 +53,7 @@ class MainVC: UIViewController {
     }
     
     func configureButton() {
-        
+        view.addSubview(button)
         button.addTarget(self, action: #selector(getRandomPlan), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -56,6 +65,7 @@ class MainVC: UIViewController {
     }
     
     func configureTextLabel() {
+        view.addSubview(titleText)
         titleText.text          = "Let's go and do a fun activity!"
         titleText.numberOfLines = 3
         NSLayoutConstraint.activate([
@@ -67,15 +77,34 @@ class MainVC: UIViewController {
     }
     
     @objc func setRandomBackground() {
-        let backgrounds = ["forest", "bowling", "movies", "park", "museum"]
+        let backgrounds = ["forest", "bowling", "movies", "park", "museum", "amusement", "aquarium", "boulder", "concert", "cooking", "gokart", "iceskate", "read", "yoga"]
         let random = Int(arc4random_uniform(UInt32 (backgrounds.count)))
         self.background.image = UIImage(named: backgrounds[random])
+        alpha = 0.0
+        add = true
     }
     
     @objc func getRandomPlan() {
         let destVC = RandomPlanVC()
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
+    }
+    
+    @objc func changeAlpha() {
+        if alpha >= 0.5 {
+            add     = false
+            alpha   = 0.5
+        } else if alpha <= 0.0 {
+            add     = true
+            alpha   = 0.0
+        }
+        
+        if add {
+            alpha += 0.01
+        } else {
+            alpha -= 0.01
+        }
+        background.alpha = alpha
     }
     
 
