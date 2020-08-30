@@ -18,6 +18,7 @@ class RandomPlanVC: UIViewController {
     
     let plans               = ["Hike!", "Bowling!", "Movies!", "Park!", "Museum!", "Amusement Park!", "Aquarium!", "Bouldering!", "Concert!", "Cooking!", "Go Karts!", "Ice Skating!", "Read!", "Yoga!"]
     let backgrounds         = ["hike", "bowling", "movies", "park", "museum", "amusement", "aquarium", "boulder", "concert", "cooking", "gokart", "iceskate", "read", "yoga"]
+    let searchTerms         = ["hike", "bowling", "movies", "park", "museum", "amusement park", "aquarium", "climbing", "concert venue", "cooking class", "gokart", "ice skate", "library", "yoga"]
     let plansDescriptions   = [
                                 "Take some fresh air. Go for a hike and enjoy the nature. Be sure to bring snaks",
                                 "Have fun making strikes at the bowling alley!",
@@ -41,11 +42,9 @@ class RandomPlanVC: UIViewController {
         configureLabels()
         configureBackground()
         configureButton()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         selectPlan()
     }
+    
     
     func configureView() {
         view.backgroundColor                            = .systemBackground
@@ -108,7 +107,7 @@ class RandomPlanVC: UIViewController {
         planLabel.text          = plans[selectedPlan]
         descriptionLabel.text   = plansDescriptions[selectedPlan]
         background.image        = UIImage(named: backgrounds[selectedPlan])
-        searchTerm              = backgrounds[selectedPlan]
+        searchTerm              = searchTerms[selectedPlan]
     }
     
     @objc func goToMap() {

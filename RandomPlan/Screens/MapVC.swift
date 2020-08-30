@@ -102,10 +102,8 @@ class MapVC: UIViewController, MKMapViewDelegate {
                 return
             }
             for item in response.mapItems {
-                let anotation = MKPointAnnotation()
-                anotation.title = item.name!
-                anotation.coordinate = CLLocationCoordinate2DMake(item.placemark.coordinate.latitude, item.placemark.coordinate.longitude)
-                self.mapView.addAnnotation(anotation)
+                let annotation = Place(title: item.name ?? "No name", coordinate: CLLocationCoordinate2DMake(item.placemark.coordinate.latitude, item.placemark.coordinate.longitude), subtitle: item.phoneNumber ?? "")
+                self.mapView.addAnnotation(annotation)
                 
             }
         }
@@ -118,6 +116,7 @@ private extension MKMapView {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         setRegion(coordinateRegion, animated: true)
     }
+    
 }
 
 extension MapVC: CLLocationManagerDelegate {
@@ -130,5 +129,66 @@ extension MapVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is Place else { return nil }
+        let identifier = "Place"
+
+        let annotationView             = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        annotationView.canShowCallout  = true
+
+        let btn                                    = UIButton(type: .detailDisclosure)
+        btn.tintColor = .systemRed
+        annotationView.rightCalloutAccessoryView   = btn
+
+
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+                let ac = UIAlertController(title: "Select action... ", message: nil, preferredStyle: .actionSheet)
+                ac.addAction(UIAlertAction(title: "Take Me there", style: .default, handler: { action in
+                    self.takeMeThere(latitude: view.annotation?.coordinate.latitude ?? 0.0, longitude: view.annotation?.coordinate.longitude ?? 0.0)
+                
+                }))
+        
+                if view.annotation!.subtitle != "" {
+                    ac.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                        let phone = view.annotation!.subtitle!!.replacingOccurrences(of: " ", with: "")
+                        self.callPlace(phone: phone)
+                    }))
+                }
+        
+                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+                present(ac, animated: true)
+    }
+    
+
+    
+    func takeMeThere(latitude:Double, longitude:Double) {
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)) {
+                UIApplication.shared.open(NSURL(string:
+                    "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")! as URL)
+
+            } else {
+                NSLog("Can't use comgooglemaps://");
+            }
+        
+    }
+    
+    func callPlace(phone: String) {
+        var uc      = URLComponents()
+        uc.scheme   = "tel"
+        uc.path     = phone
+        
+        if let phoneCallURL = uc.url {
+          let application:UIApplication = UIApplication.shared
+          if (application.canOpenURL(phoneCallURL)) {
+              application.open(phoneCallURL, options: [:], completionHandler: nil)
+          }
+        }
+        
     }
 }
