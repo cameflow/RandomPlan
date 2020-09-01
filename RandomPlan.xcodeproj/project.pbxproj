@@ -21,6 +21,10 @@
 		FACA242A24F89631003B1933 /* RPTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA242924F89631003B1933 /* RPTitleLabel.swift */; };
 		FACA242C24F89F1F003B1933 /* RandomPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA242B24F89F1F003B1933 /* RandomPlanVC.swift */; };
 		FACA242E24F8A613003B1933 /* RPBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA242D24F8A613003B1933 /* RPBodyLabel.swift */; };
+		FAF62B8024FE059000962BA4 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B7F24FE059000962BA4 /* APIResponse.swift */; };
+		FAF62B8224FE05A600962BA4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8124FE05A600962BA4 /* Movie.swift */; };
+		FAF62B8724FE05ED00962BA4 /* RPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8624FE05ED00962BA4 /* RPError.swift */; };
+		FAF62B8A24FE062500962BA4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8924FE062500962BA4 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		FACA242924F89631003B1933 /* RPTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPTitleLabel.swift; sourceTree = "<group>"; };
 		FACA242B24F89F1F003B1933 /* RandomPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPlanVC.swift; sourceTree = "<group>"; };
 		FACA242D24F8A613003B1933 /* RPBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPBodyLabel.swift; sourceTree = "<group>"; };
+		FAF62B7F24FE059000962BA4 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		FAF62B8124FE05A600962BA4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		FAF62B8624FE05ED00962BA4 /* RPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPError.swift; sourceTree = "<group>"; };
+		FAF62B8924FE062500962BA4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,9 @@
 		FA2D71A724F5E7A2006A56EA /* RandomPlan */ = {
 			isa = PBXGroup;
 			children = (
+				FAF62B8824FE061A00962BA4 /* Managers */,
+				FAF62B8324FE05CC00962BA4 /* Utilities */,
+				FAF62B7E24FE056A00962BA4 /* Models */,
 				FA5C9B1524FB079600379E8C /* CustomViews */,
 				FA2D71C224F5EDB9006A56EA /* Screens */,
 				FA2D71A824F5E7A2006A56EA /* AppDelegate.swift */,
@@ -105,6 +116,31 @@
 				FACA242D24F8A613003B1933 /* RPBodyLabel.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		FAF62B7E24FE056A00962BA4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAF62B7F24FE059000962BA4 /* APIResponse.swift */,
+				FAF62B8124FE05A600962BA4 /* Movie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAF62B8324FE05CC00962BA4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FAF62B8624FE05ED00962BA4 /* RPError.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FAF62B8824FE061A00962BA4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FAF62B8924FE062500962BA4 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,11 +219,15 @@
 				FACA242C24F89F1F003B1933 /* RandomPlanVC.swift in Sources */,
 				FA2D71BD24F5E8B4006A56EA /* RPTabBarController.swift in Sources */,
 				FA2D71A924F5E7A2006A56EA /* AppDelegate.swift in Sources */,
+				FAF62B8024FE059000962BA4 /* APIResponse.swift in Sources */,
 				FA23F56424F9ED9500B06528 /* MapVC.swift in Sources */,
 				FACA242E24F8A613003B1933 /* RPBodyLabel.swift in Sources */,
+				FAF62B8224FE05A600962BA4 /* Movie.swift in Sources */,
 				FACA242A24F89631003B1933 /* RPTitleLabel.swift in Sources */,
 				FA2D71AB24F5E7A2006A56EA /* SceneDelegate.swift in Sources */,
 				FA46E00824FB1C680073DECE /* Place.swift in Sources */,
+				FAF62B8A24FE062500962BA4 /* NetworkManager.swift in Sources */,
+				FAF62B8724FE05ED00962BA4 /* RPError.swift in Sources */,
 				FA2D71C124F5EDB5006A56EA /* MoviesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
