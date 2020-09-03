@@ -13,7 +13,6 @@ class NetworkManager {
     static let shared           = NetworkManager()
     private let baseURL_movie   = "https://api.themoviedb.org/3/"
     private let baseURL_poster  = "https://img.omdbapi.com/"
-    
     private init() {}
     private var moviesArr:[Movie] = []
 
