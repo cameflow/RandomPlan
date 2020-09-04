@@ -13,7 +13,7 @@ class RPTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor = .systemRed
-        viewControllers                 = [createMainScreenNC(), createRandomMovieNC()]
+        viewControllers                 = [createMainScreenNC(), createRandomMovieNC(), createSettingsVC()]
     }
     
 
@@ -29,6 +29,13 @@ class RPTabBarController: UITabBarController {
         randomMovie.tabBarItem  = UITabBarItem(title: "Movies", image: UIImage(systemName: "film"), tag: 1)
         
         return UINavigationController(rootViewController: randomMovie)
+    }
+    
+    func createSettingsVC() -> UINavigationController {
+        let settingsScreen  = SettingsVC()
+        settingsScreen.tabBarItem   = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
+        
+        return UINavigationController(rootViewController: settingsScreen)
     }
 
 }
