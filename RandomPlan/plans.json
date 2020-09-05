@@ -298,6 +298,138 @@
         "food": 1,
         "time": 2,
         "cost": 1
+    },
+    {
+        "id": 1026,
+        "title": "Picnic",
+        "description": "Treat yourself with a picnic. It can be as fancy or as simple as you like.",
+        "searchTerm": "park",
+        "background": "picnic",
+        "place": 0,
+        "active": 1,
+        "food": 0,
+        "time": 0,
+        "cost": 0
+    },
+    {
+        "id": 1027,
+        "title": "Sighteeing",
+        "description": "There are a lot of things to do in the city. Become a tourist for one day on your own city.",
+        "searchTerm": "landmarks",
+        "background": "sightseeing",
+        "place": 0,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1028,
+        "title": "Race",
+        "description": "Set a new personal record or just do it for fun. See if there is a local race near you.",
+        "searchTerm": "track",
+        "background": "race",
+        "place": 0,
+        "active": 0,
+        "food": 1,
+        "time": 0,
+        "cost": 1
+    },
+    {
+        "id": 1029,
+        "title": "Walk",
+        "description": "If you are feeling stresed you migh need to take a walk. It's always nice to disconnect and go outside.",
+        "searchTerm": "park",
+        "background": "walk",
+        "place": 0,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1030,
+        "title": "Videogames",
+        "description": "If you have a gaming console you can play either alone or with friends. Choose a game and go to the next level",
+        "searchTerm": "arcade",
+        "background": "videogame",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1031,
+        "title": "Tabletop Game",
+        "description": "Gave a game night! You can play UNO or Monopoly.",
+        "searchTerm": "tabletop games",
+        "background": "dice",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1032,
+        "title": "Guided Meditation",
+        "description": "You can try a guided meditation. Lower the lights and put some calming music.",
+        "searchTerm": "meditation centers",
+        "background": "meditation",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1033,
+        "title": "Listen to music",
+        "description": "Listen to your favorite album or maybe discover something new. There is always something new to find",
+        "searchTerm": "music store",
+        "background": "music",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1034,
+        "title": "DIY Project",
+        "description": "Have you ever tried building something for yourself? Today is the day you do it",
+        "searchTerm": "hardware store",
+        "background": "diy",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1035,
+        "title": "Home Photoshoot",
+        "description": "Try taking pictures inside your house. Maybe you can discover a new technique. Get creative",
+        "searchTerm": "photography",
+        "background": "camara",
+        "place": 2,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
+    },
+    {
+        "id": 1036,
+        "title": "City Photoshoot",
+        "description": "Go outside and take pictures of your city. Maybe you can also have a great photoshoot",
+        "searchTerm": "landmark",
+        "background": "camara",
+        "place": 1,
+        "active": 1,
+        "food": 1,
+        "time": 2,
+        "cost": 0
     }
     
 ]

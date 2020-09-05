@@ -9,5 +9,6 @@
 import Foundation
 
 enum RPError: String, Error {
-    case wrongData = "Wrong data"
+    case wrongData      = "Error with the data"
+    case settingErrors  = "Error retrieving the settings"
 }

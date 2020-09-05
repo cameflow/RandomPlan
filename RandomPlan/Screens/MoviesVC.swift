@@ -153,7 +153,12 @@ class MoviesVC: UIViewController {
                 self.updateMovie(with: movies)
                 self.page += 1
             case .failure(let error):
-                print(error)
+                let alert = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
+                
             }
         }
     }
@@ -180,7 +185,11 @@ class MoviesVC: UIViewController {
                 }
                 
             case .failure(let error):
-                print(error)
+                let alert = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
             }
         }
     }
@@ -209,7 +218,11 @@ class MoviesVC: UIViewController {
             case .success(let movieExtId):
                 self.getPosterUrl(movieId: movieExtId.imdbId)
             case .failure(let error):
-                print(error)
+                let alert = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
             }
         }
         

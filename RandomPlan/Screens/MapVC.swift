@@ -98,7 +98,11 @@ class MapVC: UIViewController, MKMapViewDelegate {
         
         search.start { (response, error) in
             guard let response = response else {
-                print("Error")
+                let alert = UIAlertController(title: "Something went wrong", message: "Error with the search, try again", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
                 return
             }
             for item in response.mapItems {

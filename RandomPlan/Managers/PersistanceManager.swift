@@ -14,7 +14,7 @@ enum PersistenceManager {
     
     static func retreiveSetting(key: String, completed: @escaping (Result<Int,RPError>) -> Void) {
         guard let setting = defaults.object(forKey: key) else {
-            completed(.failure(.wrongData))
+            completed(.failure(.settingErrors))
             return
         }
         completed(.success(setting as! Int))

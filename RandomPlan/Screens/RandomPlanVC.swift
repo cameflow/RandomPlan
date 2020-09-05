@@ -131,7 +131,11 @@ class RandomPlanVC: UIViewController {
                 case .success(let setting):
                     self.settings[key] = setting
                 case .failure(let error):
-                    print(error)
+                    let alert = UIAlertController(title: "Something went wrong", message: error.rawValue, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true)
+                    }
                 }
             }
         }
