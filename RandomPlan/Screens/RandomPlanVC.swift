@@ -135,9 +135,7 @@ class RandomPlanVC: UIViewController {
                 }
             }
         }
-        
     }
-    
     
 
 }
