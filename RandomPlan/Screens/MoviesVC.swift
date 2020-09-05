@@ -13,14 +13,22 @@ class MoviesVC: UIViewController {
     var moviePoster         = UIImageView()
     var movieTitle          = RPTitleLabel(textAlignment: .center, fontSize: 35)
     var movieDescription    = RPBodyLabel(textAlignment: .center)
+    var movieRate           = RPBodyLabel(textAlignment: .left)
+    var movieDuration       = RPBodyLabel(textAlignment: .left)
+    var movieReleaseDate    = RPBodyLabel(textAlignment: .left)
+    var movieDirector       = RPBodyLabel(textAlignment: .left)
     var moviesList:[Movie]  = []
     var page                = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        configureMoviePoster()
         configureMovieTitle()
+        configureMoviePoster()
+        configureMovieRate()
+        configureMovieDuration()
+        configureMovieReleaseDate()
+        configureMovieDirector()
         configureMovieDescription()
         getRandomMovie()
 
@@ -45,8 +53,8 @@ class MoviesVC: UIViewController {
         moviePoster.clipsToBounds                               = true
         
         NSLayoutConstraint.activate([
-            moviePoster.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            moviePoster.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            moviePoster.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 20),
+            moviePoster.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             moviePoster.heightAnchor.constraint(equalToConstant: 200),
             moviePoster.widthAnchor.constraint(equalToConstant: 120)
         ])
@@ -60,17 +68,72 @@ class MoviesVC: UIViewController {
         let padding:CGFloat         = 20.0
         
         NSLayoutConstraint.activate([
-            movieTitle.centerYAnchor.constraint(equalTo: moviePoster.centerYAnchor),
-            movieTitle.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: padding),
+            movieTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            movieTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             movieTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            movieTitle.heightAnchor.constraint(equalToConstant: 150)
+            movieTitle.heightAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    func configureMovieRate() {
+        view.addSubview(movieRate)
+        movieRate.translatesAutoresizingMaskIntoConstraints = false
+        
+        let padding:CGFloat = 20.0
+        
+        NSLayoutConstraint.activate([
+            movieRate.topAnchor.constraint(equalTo: moviePoster.topAnchor, constant: padding),
+            movieRate.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: padding),
+            movieRate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            movieRate.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
+    func configureMovieDuration() {
+        view.addSubview(movieDuration)
+        movieDuration.translatesAutoresizingMaskIntoConstraints = false
+        
+        let padding:CGFloat = 20.0
+        
+        NSLayoutConstraint.activate([
+            movieDuration.topAnchor.constraint(equalTo: movieRate.bottomAnchor, constant: padding),
+            movieDuration.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: padding),
+            movieDuration.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            movieDuration.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
+    func configureMovieReleaseDate() {
+        view.addSubview(movieReleaseDate)
+        movieReleaseDate.translatesAutoresizingMaskIntoConstraints = false
+        
+        let padding:CGFloat = 20.0
+        
+        NSLayoutConstraint.activate([
+            movieReleaseDate.topAnchor.constraint(equalTo: movieDuration.bottomAnchor, constant: padding),
+            movieReleaseDate.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: padding),
+            movieReleaseDate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            movieReleaseDate.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
+    func configureMovieDirector() {
+        view.addSubview(movieDirector)
+        movieDirector.translatesAutoresizingMaskIntoConstraints = false
+        let padding:CGFloat = 20.0
+        
+        NSLayoutConstraint.activate([
+            movieDirector.topAnchor.constraint(equalTo: movieReleaseDate.bottomAnchor, constant: padding),
+            movieDirector.leadingAnchor.constraint(equalTo: moviePoster.trailingAnchor, constant: padding),
+            movieDirector.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            movieDirector.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
     func configureMovieDescription() {
         view.addSubview(movieDescription)
         
-        movieDescription.numberOfLines  = 10
+        movieDescription.numberOfLines  = 0
         let padding:CGFloat             = 20.0
         
         NSLayoutConstraint.activate([
@@ -102,6 +165,12 @@ class MoviesVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let moviePoster):
+                DispatchQueue.main.async {
+                    self.movieRate.text = "Rated: \(moviePoster.Rated)"
+                    self.movieDuration.text = "Druation: \(moviePoster.Runtime)"
+                    self.movieReleaseDate.text = "Released: \(moviePoster.Released)"
+                    self.movieDirector.text = "Directed by: \(moviePoster.Director)"
+                }
                 if (moviePoster.Poster != "N/A") {
                     self.getPoster(posterUrl: moviePoster.Poster!)
                 } else {
@@ -131,8 +200,8 @@ class MoviesVC: UIViewController {
         DispatchQueue.main.async {
             self.movieTitle.text        = movie.title
             self.movieDescription.text  = movie.overview
-            self.title                  = movie.title
-            self.tabBarItem.title       = "Movies"
+            self.title                  = "Movie"
+            self.tabBarItem.title       = "Movie"
         }
         NetworkManager.shared.getExternalID(movieId: movie.id) { [weak self] result in
             guard let self = self else { return }
