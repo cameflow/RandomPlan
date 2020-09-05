@@ -13,15 +13,17 @@ class MainVC: UIViewController {
     var timer_background: Timer!
     var timer_alpha: Timer!
     
-    var background      = UIImageView()
-    let titleText       = RPTitleLabel(textAlignment: .center, fontSize: 50)
-    let button          = RPButton(backgroundColor: .systemRed, title: "Give me a plan!")
-    var alpha:CGFloat   = 0.0
-    var add             = true
+    var background              = UIImageView()
+    let titleText               = RPTitleLabel(textAlignment: .center, fontSize: 50)
+    let button                  = RPButton(backgroundColor: .systemRed, title: "Give me a plan!")
+    var alpha:CGFloat           = 0.0
+    var backgrounds:[String]    = []
+    var add                     = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTimers()
+        getBackgrounds()
         configureBackground()
         configureTextLabel()
         configureButton()
@@ -77,8 +79,14 @@ class MainVC: UIViewController {
         ])
     }
     
+    func getBackgrounds() {
+        for plan in plansData {
+            backgrounds.append(plan.background)
+        }
+    }
+    
     @objc func setRandomBackground() {
-        let backgrounds = ["forest", "bowling", "movies", "park", "museum", "amusement", "aquarium", "boulder", "concert", "cooking", "gokart", "iceskate", "read", "yoga"]
+        
         let random = Int(arc4random_uniform(UInt32 (backgrounds.count)))
         self.background.image = UIImage(named: backgrounds[random])
         alpha = 0.0
