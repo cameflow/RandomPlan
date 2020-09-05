@@ -15,31 +15,8 @@ class RandomPlanVC: UIViewController {
     let button              = RPButton(backgroundColor: .systemRed, title: "Find a place!")
     var background          = UIImageView()
     var searchTerm          = ""
-    var placeSetting        = 0
-    var activeSetting       = 0
-    var foodSetting         = 0
-    var timeSetting         = 0
-    var costSetting         = 0
-    
-    let plans               = ["Hike!", "Bowling!", "Movies!", "Park!", "Museum!", "Amusement Park!", "Aquarium!", "Bouldering!", "Concert!", "Cooking!", "Go Karts!", "Ice Skating!", "Read!", "Yoga!"]
-    let backgrounds         = ["hike", "bowling", "movies", "park", "museum", "amusement", "aquarium", "boulder", "concert", "cooking", "gokart", "iceskate", "read", "yoga"]
-    let searchTerms         = ["hike", "bowling", "movies", "park", "museum", "amusement park", "aquarium", "climbing", "concert venue", "cooking class", "gokart", "ice skate", "library", "yoga"]
-    let plansDescriptions   = [
-                                "Take some fresh air. Go for a hike and enjoy the nature. Be sure to bring snaks",
-                                "Have fun making strikes at the bowling alley!",
-                                "Action, Comedy, Scary. You choose! Go to the cinema and enjoy your movie",
-                                "Nice day to go to a park. Enjoy the day and take a walk, maybe you can take a book and read or have a picnic",
-                                "Today is a good day to learn something new. Go to a museum!",
-                                "Time to ride a roller coaster or visit a hunted mantion. Visit an amusement park",
-                                "Are you afraid of sharks? Go visit them at the aquarium",
-                                "Do you want to improve your fiteness and have fun. Try going climbing",
-                                "Maybe your favorite band is on town. Go to a concert and have fun",
-                                "Are you hungry? Why don't you cook something new. You can use your familiy's secret recipie",
-                                "Show everyone you are the best driver. Go to the Go Karts",
-                                "It might not be snowing outside but you can go ice skating!",
-                                "Maybe it's time to reax. Grab a cup of tea and read a book",
-                                "Are you feeling tense? Try a yoga class to loosen up your muscles"
-                              ]
+    var settings            = ["Place": 0, "Active": 0, "Food": 0, "Time": 0, "Cost": 0]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +48,6 @@ class RandomPlanVC: UIViewController {
             background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             background.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
     }
     
     func configureLabels() {
@@ -107,13 +83,35 @@ class RandomPlanVC: UIViewController {
         ])
     }
     
+    func filterPlan(parameter: Int, settingValue: Int, settingName: String) -> Bool {
+        if settingName == "Place" {
+            if settingValue != 3 { return parameter == settingValue } else { return true }
+        } else if settingName == "Time" {
+            if parameter == 2 || settingValue == 2 { return true } else { return parameter == settingValue }
+        } else {
+            if settingValue != 2 { return parameter == settingValue } else { return true }
+        }
+    }
     
     @objc func selectPlan() {
-        let selectedPlan        = Int(arc4random_uniform(UInt32 (plans.count)))
-        planLabel.text          = plans[selectedPlan]
-        descriptionLabel.text   = plansDescriptions[selectedPlan]
-        background.image        = UIImage(named: backgrounds[selectedPlan])
-        searchTerm              = searchTerms[selectedPlan]
+        let plans = plansData.filter { filterPlan(parameter: $0.active, settingValue: settings["Active"] ?? 2, settingName:                                         "Active") &&
+                                       filterPlan(parameter: $0.time, settingValue: settings["Time"] ?? 2, settingName: "Time") &&
+                                       filterPlan(parameter: $0.food, settingValue: settings["Food"] ?? 2, settingName: "Food") &&
+                                       filterPlan(parameter: $0.place, settingValue: settings["Place"] ?? 2, settingName: "Place") &&
+                                       filterPlan(parameter: $0.cost, settingValue: settings["Cost"] ?? 2, settingName: "Cost") }
+        
+ 
+        if let selectedPlan = plans.randomElement() {
+            planLabel.text          = selectedPlan.title
+            descriptionLabel.text   = selectedPlan.description
+            background.image        = UIImage(named: selectedPlan.background)
+            searchTerm              = selectedPlan.searchTerm
+        } else {
+            planLabel.text          = "No plan available"
+            descriptionLabel.text   = "There is no plan that matches your settings.\n Go to your settings and change them"
+            searchTerm              = ""
+        }
+        
     }
     
     @objc func goToMap() {
@@ -126,51 +124,18 @@ class RandomPlanVC: UIViewController {
     }
     
     func getSettings() {
-        PersistenceManager.retreiveSetting(key: "Place") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let setting):
-                self.placeSetting = setting
-            case .failure(let error):
-                print(error)
+        for (key, _) in settings {
+            PersistenceManager.retreiveSetting(key: key) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let setting):
+                    self.settings[key] = setting
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
-        PersistenceManager.retreiveSetting(key: "Active") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let setting):
-                self.activeSetting = setting
-            case .failure(let error):
-                print(error)
-            }
-        }
-        PersistenceManager.retreiveSetting(key: "Food") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let setting):
-                self.foodSetting = setting
-            case .failure(let error):
-                print(error)
-            }
-        }
-        PersistenceManager.retreiveSetting(key: "Time") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let setting):
-                self.timeSetting = setting
-            case .failure(let error):
-                print(error)
-            }
-        }
-        PersistenceManager.retreiveSetting(key: "Cost") { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let setting):
-                self.costSetting = setting
-            case .failure(let error):
-                print(error)
-            }
-        }
+        
     }
     
     
