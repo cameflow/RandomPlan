@@ -15,6 +15,11 @@ class RandomPlanVC: UIViewController {
     let button              = RPButton(backgroundColor: .systemRed, title: "Find a place!")
     var background          = UIImageView()
     var searchTerm          = ""
+    var placeSetting        = 0
+    var activeSetting       = 0
+    var foodSetting         = 0
+    var timeSetting         = 0
+    var costSetting         = 0
     
     let plans               = ["Hike!", "Bowling!", "Movies!", "Park!", "Museum!", "Amusement Park!", "Aquarium!", "Bouldering!", "Concert!", "Cooking!", "Go Karts!", "Ice Skating!", "Read!", "Yoga!"]
     let backgrounds         = ["hike", "bowling", "movies", "park", "museum", "amusement", "aquarium", "boulder", "concert", "cooking", "gokart", "iceskate", "read", "yoga"]
@@ -38,6 +43,7 @@ class RandomPlanVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getSettings()
         configureView()
         configureLabels()
         configureBackground()
@@ -117,6 +123,54 @@ class RandomPlanVC: UIViewController {
     
     @objc func dismissVC() {
         dismiss(animated: true)
+    }
+    
+    func getSettings() {
+        PersistenceManager.retreiveSetting(key: "Place") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.placeSetting = setting
+            case .failure(let error):
+                print(error)
+            }
+        }
+        PersistenceManager.retreiveSetting(key: "Active") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.activeSetting = setting
+            case .failure(let error):
+                print(error)
+            }
+        }
+        PersistenceManager.retreiveSetting(key: "Food") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.foodSetting = setting
+            case .failure(let error):
+                print(error)
+            }
+        }
+        PersistenceManager.retreiveSetting(key: "Time") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.timeSetting = setting
+            case .failure(let error):
+                print(error)
+            }
+        }
+        PersistenceManager.retreiveSetting(key: "Cost") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.costSetting = setting
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     

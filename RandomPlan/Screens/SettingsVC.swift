@@ -61,11 +61,19 @@ class SettingsVC: UIViewController {
         
         segmentedControl                            = UISegmentedControl(items: segments)
         segmentedControl.selectedSegmentTintColor   = .systemRed
-        segmentedControl.selectedSegmentIndex       = 0
+        PersistenceManager.retreiveSetting(key: "Place") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.segmentedControl.selectedSegmentIndex = setting
+            case .failure(_):
+                self.segmentedControl.selectedSegmentIndex = 0
+            }
+        }
         segmentedControl.backgroundColor            = .secondarySystemBackground
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints  = false
-        segmentedControl.addTarget(self, action: #selector(change(_:)), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(savePlace(_:)), for: .valueChanged)
         
         
         view.addSubview(segmentedControl)
@@ -95,11 +103,19 @@ class SettingsVC: UIViewController {
         
         segmentedControl_02                            = UISegmentedControl(items: segments)
         segmentedControl_02.selectedSegmentTintColor   = .systemRed
-        segmentedControl_02.selectedSegmentIndex       = 0
+        PersistenceManager.retreiveSetting(key: "Active") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.segmentedControl_02.selectedSegmentIndex = setting
+            case .failure(_):
+                self.segmentedControl_02.selectedSegmentIndex = 0
+            }
+        }
         segmentedControl_02.backgroundColor            = .secondarySystemBackground
         
         segmentedControl_02.translatesAutoresizingMaskIntoConstraints  = false
-        segmentedControl_02.addTarget(self, action: #selector(change(_:)), for: .valueChanged)
+        segmentedControl_02.addTarget(self, action: #selector(saveActive(_:)), for: .valueChanged)
         
         
         view.addSubview(segmentedControl_02)
@@ -129,11 +145,19 @@ class SettingsVC: UIViewController {
         
         segmentedControl_03                            = UISegmentedControl(items: segments)
         segmentedControl_03.selectedSegmentTintColor   = .systemRed
-        segmentedControl_03.selectedSegmentIndex       = 0
+        PersistenceManager.retreiveSetting(key: "Food") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.segmentedControl_03.selectedSegmentIndex = setting
+            case .failure(_):
+                self.segmentedControl_03.selectedSegmentIndex = 0
+            }
+        }
         segmentedControl_03.backgroundColor            = .secondarySystemBackground
         
         segmentedControl_03.translatesAutoresizingMaskIntoConstraints  = false
-        segmentedControl_03.addTarget(self, action: #selector(change(_:)), for: .valueChanged)
+        segmentedControl_03.addTarget(self, action: #selector(saveFood(_:)), for: .valueChanged)
         
         
         view.addSubview(segmentedControl_03)
@@ -163,11 +187,19 @@ class SettingsVC: UIViewController {
         
         segmentedControl_04                            = UISegmentedControl(items: segments)
         segmentedControl_04.selectedSegmentTintColor   = .systemRed
-        segmentedControl_04.selectedSegmentIndex       = 0
+        PersistenceManager.retreiveSetting(key: "Time") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.segmentedControl_04.selectedSegmentIndex = setting
+            case .failure(_):
+                self.segmentedControl_04.selectedSegmentIndex = 0
+            }
+        }
         segmentedControl_04.backgroundColor            = .secondarySystemBackground
         
         segmentedControl_04.translatesAutoresizingMaskIntoConstraints  = false
-        segmentedControl_04.addTarget(self, action: #selector(change(_:)), for: .valueChanged)
+        segmentedControl_04.addTarget(self, action: #selector(saveTime(_:)), for: .valueChanged)
         
         
         view.addSubview(segmentedControl_04)
@@ -197,11 +229,19 @@ class SettingsVC: UIViewController {
         
         segmentedControl_05                            = UISegmentedControl(items: segments)
         segmentedControl_05.selectedSegmentTintColor   = .systemRed
-        segmentedControl_05.selectedSegmentIndex       = 0
+        PersistenceManager.retreiveSetting(key: "Cost") { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let setting):
+                self.segmentedControl_05.selectedSegmentIndex = setting
+            case .failure(_):
+                self.segmentedControl_05.selectedSegmentIndex = 0
+            }
+        }
         segmentedControl_05.backgroundColor            = .secondarySystemBackground
         
         segmentedControl_05.translatesAutoresizingMaskIntoConstraints  = false
-        segmentedControl_05.addTarget(self, action: #selector(change(_:)), for: .valueChanged)
+        segmentedControl_05.addTarget(self, action: #selector(saveCost(_:)), for: .valueChanged)
         
         
         view.addSubview(segmentedControl_05)
@@ -213,18 +253,71 @@ class SettingsVC: UIViewController {
         ])
     }
     
-    @objc func change(_ segmentedControl: UISegmentedControl) {
+    @objc func savePlace(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            print("left")
+            PersistenceManager.saveSetting(value: 0, key: "Place")
         case 1:
-            print("right")
+            PersistenceManager.saveSetting(value: 1, key: "Place")
+        case 2:
+            PersistenceManager.saveSetting(value: 2, key: "Place")
+        case 3:
+            PersistenceManager.saveSetting(value: 3, key: "Place")
         default:
             print("none")
         }
     }
     
-
-
+    @objc func saveActive(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            PersistenceManager.saveSetting(value: 0, key: "Active")
+        case 1:
+            PersistenceManager.saveSetting(value: 1, key: "Active")
+        case 2:
+            PersistenceManager.saveSetting(value: 2, key: "Active")
+        default:
+            print("none")
+        }
+    }
+    
+    @objc func saveFood(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            PersistenceManager.saveSetting(value: 0, key: "Food")
+        case 1:
+            PersistenceManager.saveSetting(value: 1, key: "Food")
+        case 2:
+            PersistenceManager.saveSetting(value: 2, key: "Food")
+        default:
+            print("none")
+        }
+    }
+    
+    @objc func saveTime(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            PersistenceManager.saveSetting(value: 0, key: "Time")
+        case 1:
+            PersistenceManager.saveSetting(value: 1, key: "Time")
+        case 2:
+            PersistenceManager.saveSetting(value: 2, key: "Time")
+        default:
+            print("none")
+        }
+    }
+    
+    @objc func saveCost(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            PersistenceManager.saveSetting(value: 0, key: "Cost")
+        case 1:
+            PersistenceManager.saveSetting(value: 1, key: "Cost")
+        case 2:
+            PersistenceManager.saveSetting(value: 2, key: "Cost")
+        default:
+            print("none")
+        }
+    }
 
 }

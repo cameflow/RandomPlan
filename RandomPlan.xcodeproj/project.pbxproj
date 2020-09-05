@@ -28,6 +28,7 @@
 		FAF62B8224FE05A600962BA4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8124FE05A600962BA4 /* Movie.swift */; };
 		FAF62B8724FE05ED00962BA4 /* RPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8624FE05ED00962BA4 /* RPError.swift */; };
 		FAF62B8A24FE062500962BA4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF62B8924FE062500962BA4 /* NetworkManager.swift */; };
+		FAFA0F992503375B00FBF1F1 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA0F982503375B00FBF1F1 /* PersistanceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		FAF62B8124FE05A600962BA4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		FAF62B8624FE05ED00962BA4 /* RPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPError.swift; sourceTree = "<group>"; };
 		FAF62B8924FE062500962BA4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAFA0F982503375B00FBF1F1 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF62B8924FE062500962BA4 /* NetworkManager.swift */,
+				FAFA0F982503375B00FBF1F1 /* PersistanceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				FA2D71AB24F5E7A2006A56EA /* SceneDelegate.swift in Sources */,
 				FA46E00824FB1C680073DECE /* Place.swift in Sources */,
 				FAF62B8A24FE062500962BA4 /* NetworkManager.swift in Sources */,
+				FAFA0F992503375B00FBF1F1 /* PersistanceManager.swift in Sources */,
 				FAF62B8724FE05ED00962BA4 /* RPError.swift in Sources */,
 				FA2D71C124F5EDB5006A56EA /* MoviesVC.swift in Sources */,
 				FA26440324FF5B4D002F94CD /* MoviePoster.swift in Sources */,
