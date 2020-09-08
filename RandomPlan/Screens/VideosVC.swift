@@ -26,6 +26,7 @@ class VideosVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Recomended Videos"
         configureTableView()
         getVideos()
 
@@ -34,7 +35,7 @@ class VideosVC: UIViewController {
     func configureTableView() {
         view.addSubview(tableView)
         tableView.frame = view.bounds
-        tableView.rowHeight = 100
+        tableView.rowHeight = 120
         tableView.delegate = self
         tableView.dataSource = self
         

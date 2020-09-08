@@ -38,20 +38,26 @@ class VideoCell: UITableViewCell {
         addSubview(thumbnailImage)
         
         thumbnailImage.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.numberOfLines = 0
-        accessoryType = .disclosureIndicator
-        let padding: CGFloat = 12
+        thumbnailImage.contentMode = .scaleAspectFill
+        thumbnailImage.layer.cornerRadius   = 10
+        thumbnailImage.layer.borderWidth    = 1
+        thumbnailImage.layer.borderColor    = UIColor.systemGray2.cgColor
+        thumbnailImage.clipsToBounds        = true
+        titleLabel.numberOfLines            = 0
+        
+        accessoryType                       = .disclosureIndicator
+        let padding: CGFloat                = 20
         
         NSLayoutConstraint.activate([
             thumbnailImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             thumbnailImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
-            thumbnailImage.heightAnchor.constraint(equalToConstant: 60),
-            thumbnailImage.widthAnchor.constraint(equalToConstant: 90),
+            thumbnailImage.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -padding),
+            thumbnailImage.widthAnchor.constraint(equalToConstant: 180),
             
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30)
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
+            titleLabel.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 
