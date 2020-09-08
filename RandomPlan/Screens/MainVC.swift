@@ -28,6 +28,7 @@ class MainVC: UIViewController {
         configureTextLabel()
         configureButton()
         navigationController?.navigationBar.isHidden = true
+        
     }
     
     func configureTimers() {

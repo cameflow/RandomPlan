@@ -24,6 +24,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
         self.plan   = plan
         title       = plan
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -39,6 +40,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
     func configureMapView() {
         view.addSubview(mapView)
         mapView.delegate = self
+
         mapView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate( [
@@ -149,6 +151,7 @@ extension MapVC: CLLocationManagerDelegate {
 
         return annotationView
     }
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
                 let ac = UIAlertController(title: "Select action... ", message: nil, preferredStyle: .actionSheet)

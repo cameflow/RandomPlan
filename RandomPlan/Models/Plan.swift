@@ -20,5 +20,6 @@ struct Plan: Codable, Hashable, Identifiable {
     var food: Int
     var time: Int
     var cost: Int
+    var playlistId: String?
     
 }

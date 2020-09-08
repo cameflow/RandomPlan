@@ -15,7 +15,9 @@ class RandomPlanVC: UIViewController {
     let button              = RPButton(backgroundColor: .systemRed, title: "Find a place!")
     var background          = UIImageView()
     var searchTerm          = ""
+    var playlistId          = ""
     var settings            = ["Place": 0, "Active": 0, "Food": 0, "Time": 0, "Cost": 0]
+    var planPlace           = 0
 
 
     override func viewDidLoad() {
@@ -106,6 +108,11 @@ class RandomPlanVC: UIViewController {
             descriptionLabel.text   = selectedPlan.description
             background.image        = UIImage(named: selectedPlan.background)
             searchTerm              = selectedPlan.searchTerm
+            planPlace               = selectedPlan.place
+            if selectedPlan.place == 2 {
+                button.setTitle("What can I do?", for: .normal)
+                playlistId = selectedPlan.playlistId ?? ""
+            }
         } else {
             planLabel.text          = "No plan available"
             descriptionLabel.text   = "There is no plan that matches your settings.\n Go to your settings and change them"
@@ -115,8 +122,14 @@ class RandomPlanVC: UIViewController {
     }
     
     @objc func goToMap() {
-        let mapView = MapVC(plan: searchTerm)
-        navigationController?.pushViewController(mapView, animated: true)
+        var destVc:UIViewController
+        if planPlace == 2 {
+            destVc = VideosVC(playlistId: playlistId)
+        } else {
+            destVc = MapVC(plan: searchTerm)
+        }
+        
+        navigationController?.pushViewController(destVc, animated: true)
     }
     
     @objc func dismissVC() {
