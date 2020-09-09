@@ -75,4 +75,9 @@ extension VideosVC: UITableViewDataSource, UITableViewDelegate {
         cell.set(video: video)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destVc = VideoDetailVC(video: videos[indexPath.row])
+        navigationController?.pushViewController(destVc, animated: true)
+    }
 }
