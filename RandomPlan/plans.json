@@ -146,7 +146,7 @@
     {
         "id": 1013,
         "title": "Reading",
-        "description": "Maybe it's time to reax. Grab a cup of tea and read a book",
+        "description": "Maybe it's time to relax. Grab a cup of tea and read a book",
         "searchTerm": "library",
         "background": "read",
         "place": 2,
@@ -154,7 +154,7 @@
         "food": 1,
         "time": 2,
         "cost": 0,
-        "playlistId": "PLy7tng2VLw1_UGgpMH8wNwv7K7J9r9bAG"
+        "playlistId": "PLxf-CDjxvNVonJFKGNR7g5L_RfrhV5gmY"
     },
     {
         "id": 1014,
@@ -359,7 +359,7 @@
         "food": 1,
         "time": 2,
         "cost": 0,
-        "playlistId": "PLChiKQUYPsJ9_ZXHeT287Ry2tIX1AiSkq"
+        "playlistId": "PL_YS9SGEwoxbL9lFUKHC9KHnrhIdP2603"
     },
     {
         "id": 1031,
@@ -372,7 +372,7 @@
         "food": 1,
         "time": 2,
         "cost": 0,
-        "playlistId": "PL2BA8E2B64B898E73"
+        "playlistId": "PLBIiHc7zsjdxzA207zfoLq9ZNJK4pep2L"
     },
     {
         "id": 1032,
@@ -398,7 +398,7 @@
         "food": 1,
         "time": 2,
         "cost": 0,
-        "playlistId": "PLMC9KNkIncKvYin_USF1qoJQnIyMAfRxl"
+        "playlistId": "PLo3pNg0eiPc9QucHWnf-msi4iZZksjwP5"
     },
     {
         "id": 1034,
@@ -441,7 +441,7 @@
     {
         "id": 1037,
         "title": "Home Yoga",
-        "description": "Go outside and take pictures of your city. Maybe you can also have a great photoshoot",
+        "description": "Are you feeling tense? Try a yoga class to loosen up your muscles",
         "searchTerm": "",
         "background": "yoga",
         "place": 2,

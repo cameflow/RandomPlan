@@ -11,6 +11,7 @@ import UIKit
 class MoviesVC: UIViewController {
     
     var moviePoster         = UIImageView()
+    var spinnerView         = UIActivityIndicatorView(style: .large)
     var movieTitle          = RPTitleLabel(textAlignment: .center, fontSize: 35)
     var movieDescription    = RPBodyLabel(textAlignment: .center)
     var movieRate           = RPBodyLabel(textAlignment: .left)
@@ -25,6 +26,7 @@ class MoviesVC: UIViewController {
         configureViewController()
         configureMovieTitle()
         configureMoviePoster()
+        configureSpinner()
         configureMovieRate()
         configureMovieDuration()
         configureMovieReleaseDate()
@@ -144,7 +146,22 @@ class MoviesVC: UIViewController {
         ])
     }
     
+    func configureSpinner() {
+        view.addSubview(spinnerView)
+        spinnerView.hidesWhenStopped = true
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        spinnerView.color = .systemRed
+        spinnerView.startAnimating()
+        view.bringSubviewToFront(spinnerView)
+        
+        NSLayoutConstraint.activate([
+            spinnerView.centerYAnchor.constraint(equalTo: moviePoster.centerYAnchor),
+            spinnerView.centerXAnchor.constraint(equalTo: moviePoster.centerXAnchor)
+        ])
+    }
+    
     @objc func getRandomMovie() {
+        
         if page > 500 { page = 1 }
         NetworkManager.shared.getMovies(page: page) { [weak self] result in
             guard let self = self else { return }
@@ -164,7 +181,13 @@ class MoviesVC: UIViewController {
     }
     
     func getPosterUrl(movieId: String) {
-        DispatchQueue.main.async { self.moviePoster.image = UIImage(named: "loading") }
+        
+        DispatchQueue.main.async {
+            //self.moviePoster.image = UIImage(named: "loading")
+            self.spinnerView.startAnimating()
+            
+            
+        }
         
         NetworkManager.shared.getPosterLink(movieId: movieId) { [weak self] result in
             guard let self = self else { return }
@@ -199,6 +222,7 @@ class MoviesVC: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.moviePoster.image = image
+                self.spinnerView.stopAnimating()
             }
         }
     }

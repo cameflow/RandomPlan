@@ -12,6 +12,7 @@ import WebKit
 class VideoDetailVC: UIViewController {
     
     var video: Video!
+    var spinnerView     = UIActivityIndicatorView(style: .large)
     let scrollView      = UIScrollView()
     var videoPlayer     = WKWebView()
     var descriptionText = RPBodyLabel(textAlignment: .left)
@@ -20,11 +21,11 @@ class VideoDetailVC: UIViewController {
         super.viewDidLoad()
         configureVC()
         configureVideoPlayer()
+        configureSpinner()
         configureScrollView()
         configureDescription()
-
-        print(video.title)
     }
+    
     
     init(video: Video) {
         super.init(nibName: nil, bundle: nil)
@@ -40,20 +41,26 @@ class VideoDetailVC: UIViewController {
     }
     
     func configureVideoPlayer() {
+        
         view.addSubview(videoPlayer)
+        
+        videoPlayer.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
         let url = URL(string: "https://www.youtube.com/embed/\(video.videoId)")!
         videoPlayer.load(URLRequest(url: url))
         
         videoPlayer.translatesAutoresizingMaskIntoConstraints = false
-        videoPlayer.layer.borderColor = UIColor.black.cgColor
-        videoPlayer.layer.borderWidth = 1
+        videoPlayer.backgroundColor     = .systemBackground
+        videoPlayer.layer.borderColor   = UIColor.black.cgColor
+        videoPlayer.layer.borderWidth   = 1
+        
+        let padding:CGFloat = 20
         
         NSLayoutConstraint.activate([
-            videoPlayer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            videoPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            videoPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            videoPlayer.heightAnchor.constraint(equalToConstant: 250)
+            videoPlayer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            videoPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            videoPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            videoPlayer.heightAnchor.constraint(equalToConstant: (view.frame.width - (padding * 2) ) * (6/9))
         ])
     }
     
@@ -81,12 +88,36 @@ class VideoDetailVC: UIViewController {
         
         NSLayoutConstraint.activate([
             descriptionText.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: padding),
-            descriptionText.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: padding),
+            descriptionText.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
             descriptionText.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
             descriptionText.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
     
+    
+    func configureSpinner() {
+        view.addSubview(spinnerView)
+        
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        spinnerView.color = .systemRed
+        spinnerView.startAnimating()
+        
+        NSLayoutConstraint.activate([
+            spinnerView.centerYAnchor.constraint(equalTo: videoPlayer.centerYAnchor),
+            spinnerView.centerXAnchor.constraint(equalTo: videoPlayer.centerXAnchor)
+        ])
+    }
+    
+    
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            if Float(videoPlayer.estimatedProgress) >= 1 {
+                spinnerView.stopAnimating()
+                spinnerView.removeFromSuperview()
+            }
+        }
+    }
 
 
 }
