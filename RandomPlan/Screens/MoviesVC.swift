@@ -11,6 +11,7 @@ import UIKit
 class MoviesVC: UIViewController {
     
     var moviePoster         = UIImageView()
+    var posterButton        = UIButton()
     var spinnerView         = UIActivityIndicatorView(style: .large)
     var movieTitle          = RPTitleLabel(textAlignment: .center, fontSize: 35)
     var movieDescription    = RPBodyLabel(textAlignment: .center)
@@ -46,6 +47,10 @@ class MoviesVC: UIViewController {
     
     func configureMoviePoster() {
         view.addSubview(moviePoster)
+        moviePoster.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showPoster))
+        moviePoster.addGestureRecognizer(tapRecognizer)
+        
         
         let borderColor                                         = UIColor.systemGray.cgColor
         moviePoster.translatesAutoresizingMaskIntoConstraints   = false
@@ -250,6 +255,11 @@ class MoviesVC: UIViewController {
             }
         }
         
+    }
+    
+    @objc func showPoster() {
+        let destVc = PosterVC(image: (moviePoster.image ?? UIImage(named: "na")!))
+        navigationController?.pushViewController(destVc, animated: true)
     }
     
 
