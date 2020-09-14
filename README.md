@@ -10,12 +10,11 @@ iOS app developed in Swift using UIKit framework doing al the UI Programmaticall
 - Get a random activity
 - See map with places near you where you can do that activity
 - Call the place or get directions
+- If the activity is at home you´ll see a list of videos to do the activity instead of a map
 - Get a recommendation for a movie
+- See the poster of the movie full screen
 - Specify parameters for the type of activities you want to do
 
-
-## TO DO
-- [ ] Be able to see full size image of Movie Poster
 
 
 ## Screenshots
@@ -35,8 +34,17 @@ iOS app developed in Swift using UIKit framework doing al the UI Programmaticall
 ### Select to get directions or to call
 ![Action sheet](screenshots/actionsheet.PNG)
 
+### List of videos
+![Videos List](screenshots/videoslist.PNG)
+
+### Video
+![Videos](screenshots/video.PNG)
+
 ### Movie recommendation
 ![Movie](screenshots/movie.PNG)
+
+### Fullscreen poster
+![Poster](screenshots/poster.PNG)
 
 ### Settings
 ![Settings](screenshots/settings.PNG)
