@@ -1,5 +1,5 @@
 # RandomPlan
-iOS app developed in Swift using UIKit framework doing al the UI Programmatically.
+iOS app developed in Swift using UIKit framework doing all the UI Programmatically.
 
 * App that will recommend you a random activity to do
 * Customize settings to get more specific recommendations.
